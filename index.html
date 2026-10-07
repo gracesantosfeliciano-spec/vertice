@@ -3,219 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>VÉRTICE / LIVE</title>
-
+    <title>VÉRTICE — Party Game</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
-<div id="noise"></div>
-<div id="cursor"></div>
+<div class="grain"></div>
 
-<main id="app">
+<header class="topbar">
+    <div class="brand">
+        <span>VÉRTICE</span>
+        <small>PARTY SYSTEM / 01</small>
+    </div>
 
-    <!-- ================= HOME ================= -->
+    <div class="connection">
+        <i id="connectionDot"></i>
+        <span id="connectionText">OFFLINE</span>
+    </div>
+</header>
 
-    <section id="screen-home" class="screen active">
+<main>
 
-        <header class="topbar">
+    <!-- HOME -->
+    <section id="home" class="screen active">
 
-            <div>VÉRTICE / 001</div>
+        <div class="hero">
+            <div class="hero-index">SYSTEM // MULTIPLAYER</div>
 
-            <div class="live">
-                <span></span>
-                REAL-TIME
-            </div>
-
-            <div>02—08 PLAYERS</div>
-
-        </header>
-
-
-        <section class="hero">
-
-            <div class="hero-label">
-                GAME / SOCIAL / LIVE
-            </div>
-
-            <h1 class="logo">
-                <span>VÉR</span>
+            <h1>
+                VÉR<br>
                 <span>TICE</span>
             </h1>
 
-            <div class="hero-description">
+            <p>
+                UMA PARTIDA.<br>
+                DEZENAS DE JOGOS.<br>
+                UM ÚNICO VENCEDOR.
+            </p>
+        </div>
 
-                <div>
-                    UMA PARTIDA.<br>
-                    NENHUM ROTEIRO.
-                </div>
+        <div class="home-actions">
 
-                <div class="muted">
-                    Perguntas, desafios e decisões que
-                    mudam a sala inteira.
-                </div>
+            <form id="createForm">
+                <input
+                    id="createName"
+                    maxlength="16"
+                    autocomplete="off"
+                    placeholder="SEU NOME"
+                    required
+                >
 
-            </div>
-
-        </section>
-
-
-        <section class="home-content">
-
-            <div class="manifesto">
-
-                <small>MANIFESTO</small>
-
-                <p>
-                    Não é quiz.
-                    Não é ranking.
-                    É o que acontece quando
-                    todo mundo precisa escolher.
-                </p>
-
-            </div>
-
-
-            <div class="actions">
-
-                <button id="createRoom" class="action primary">
-
-                    <span>CRIAR SALA</span>
-
-                    <b>↗</b>
-
+                <button class="main-button" type="submit">
+                    CRIAR SALA
+                    <span>→</span>
                 </button>
+            </form>
 
+            <div class="join-box">
+                <input
+                    id="joinName"
+                    maxlength="16"
+                    autocomplete="off"
+                    placeholder="SEU NOME"
+                >
 
-                <button id="showJoin" class="action">
+                <input
+                    id="roomInput"
+                    maxlength="6"
+                    autocomplete="off"
+                    placeholder="CÓDIGO"
+                >
 
-                    <span>ENTRAR EM UMA SALA</span>
-
-                    <b>→</b>
-
+                <button id="joinBtn" class="outline-button">
+                    ENTRAR
                 </button>
-
-
-                <div id="joinPanel" class="join-panel hidden">
-
-                    <label>CÓDIGO DA SALA</label>
-
-                    <div class="join-input">
-
-                        <input
-                            id="roomInput"
-                            maxlength="6"
-                            placeholder="A7K2PX"
-                            autocomplete="off"
-                        >
-
-                        <button id="joinRoom">
-                            ENTRAR ↗
-                        </button>
-
-                    </div>
-
-                    <p id="homeError"></p>
-
-                </div>
-
             </div>
 
-        </section>
+            <p id="homeError" class="error"></p>
 
+        </div>
 
-        <footer class="footer">
-
-            <span>NO ACCOUNTS / NO DOWNLOAD</span>
-
-            <span>BUILD 01.10</span>
-
-        </footer>
+        <div class="game-count">
+            <strong>24</strong>
+            <span>MINIJOGOS<br>INCLUÍDOS</span>
+        </div>
 
     </section>
 
+    <!-- LOBBY -->
+    <section id="lobby" class="screen">
 
+        <div class="section-label">
+            <span>LOBBY</span>
+            <span id="lobbyStatus">AGUARDANDO</span>
+        </div>
 
-    <!-- ================= LOBBY ================= -->
+        <div class="lobby-grid">
 
-    <section id="screen-lobby" class="screen">
-
-        <header class="topbar">
-
-            <button class="back" data-back>
-                ← VOLTAR
-            </button>
-
-            <div class="live">
-                <span></span>
-                WAITING ROOM
-            </div>
-
-            <div id="lobbyStatus">
-                0 PLAYERS
-            </div>
-
-        </header>
-
-
-        <div class="lobby">
-
-            <div class="room">
-
-                <small>ROOM CODE</small>
+            <div>
+                <div class="room-label">ROOM CODE</div>
 
                 <div id="roomCode" class="room-code">
                     ------
                 </div>
 
-                <button id="copyInvite" class="text-button">
-                    COPIAR CONVITE ↗
+                <button id="copyRoom" class="tiny-button">
+                    COPIAR CONVITE
                 </button>
 
-                <p id="lobbyError"></p>
-
+                <p class="lobby-description">
+                    Compartilhe o código.<br>
+                    Quando todo mundo entrar,<br>
+                    o anfitrião inicia a partida.
+                </p>
             </div>
 
+            <div class="players-panel">
 
-            <div class="players">
-
-                <div class="players-header">
-
-                    <span>PLAYER MANIFEST</span>
-
-                    <span id="hostLabel">
-                        HOST — //
-                    </span>
-
+                <div class="panel-title">
+                    JOGADORES
+                    <span id="playerCount">0/8</span>
                 </div>
 
+                <div id="playersList"></div>
 
-                <div id="playerList"></div>
-
-
-                <button
-                    id="startGame"
-                    class="action primary start"
-                    disabled
-                >
-
-                    <span>INICIAR PARTIDA</span>
-
-                    <b>→</b>
-
+                <button id="startBtn" class="start-button" disabled>
+                    INICIAR VÉRTICE
                 </button>
-
-
-                <div id="waitLabel" class="wait">
-                    AGUARDANDO O HOST...
-                </div>
 
             </div>
 
@@ -223,262 +141,74 @@
 
     </section>
 
+    <!-- GAME -->
+    <section id="game" class="screen">
 
+        <div class="game-header">
 
-    <!-- ================= GAME ================= -->
-
-    <section id="screen-game" class="screen">
-
-        <header class="game-header">
-
-            <div class="game-title">
-
-                <small>VÉRTICE / LIVE</small>
-
-                <strong id="roundLabel">
-                    ROUND 01 / 12
-                </strong>
-
+            <div>
+                <small>RODADA</small>
+                <strong id="roundNumber">01</strong>
             </div>
 
-
-            <div class="game-room">
-                ROOM
-                <b id="gameRoom">------</b>
+            <div class="game-name">
+                <small id="gameCategory">MINIGAME</small>
+                <strong id="gameTitle">---</strong>
             </div>
 
-
-            <div class="live">
-                <span></span>
-                LIVE
+            <div class="timer">
+                <span id="timer">10.0</span>
             </div>
-
-        </header>
-
-
-        <div class="game-layout">
-
-            <!-- PLAYERS -->
-
-            <aside class="sidebar">
-
-                <div class="sidebar-title">
-                    PLAYERS
-                    <span id="gamePlayerCount">00</span>
-                </div>
-
-                <div id="gamePlayers"></div>
-
-
-                <div class="feed">
-
-                    <div class="sidebar-title">
-                        LIVE FEED
-                    </div>
-
-                    <div id="feedList"></div>
-
-                </div>
-
-            </aside>
-
-
-
-            <!-- CHALLENGE -->
-
-            <article class="challenge">
-
-                <div class="challenge-meta">
-
-                    <span id="cardType">
-                        QUESTION
-                    </span>
-
-                    <span id="targetLabel">
-                        FOR EVERYONE
-                    </span>
-
-                </div>
-
-
-                <div class="timer">
-
-                    <div id="timerBar"></div>
-
-                    <span id="timerText">
-                        20
-                    </span>
-
-                </div>
-
-
-                <div
-                    id="cardNumber"
-                    class="card-number"
-                >
-                    01
-                </div>
-
-
-                <h2 id="cardText">
-                    A pergunta aparece aqui.
-                </h2>
-
-
-                <p id="cardHint"></p>
-
-
-                <div class="answers">
-
-                    <button
-                        class="answer"
-                        data-choice="A"
-                    >
-                        <b>A</b>
-                        <span>EU FARIA</span>
-                    </button>
-
-
-                    <button
-                        class="answer"
-                        data-choice="B"
-                    >
-                        <b>B</b>
-                        <span>NEM PENSANDO</span>
-                    </button>
-
-
-                    <button
-                        class="answer"
-                        data-choice="C"
-                    >
-                        <b>C</b>
-                        <span>DEPENDE</span>
-                    </button>
-
-                </div>
-
-
-                <div class="next-area">
-
-                    <button
-                        id="nextRound"
-                        class="action primary"
-                    >
-                        PRÓXIMA RODADA →
-                    </button>
-
-                    <span>
-                        SOMENTE O HOST AVANÇA
-                    </span>
-
-                </div>
-
-            </article>
 
         </div>
+
+        <div id="gameArea" class="game-area"></div>
+
+        <div class="score-strip">
+            <div>
+                <span>SEUS PONTOS</span>
+                <strong id="myScore">0</strong>
+            </div>
+
+            <div>
+                <span>POSIÇÃO</span>
+                <strong id="myPosition">—</strong>
+            </div>
+
+            <div>
+                <span>RODADA</span>
+                <strong id="roundPoints">+0</strong>
+            </div>
+        </div>
+
+        <div id="livePlayers" class="live-players"></div>
 
     </section>
 
+    <!-- RESULTS -->
+    <section id="results" class="screen">
 
-
-    <!-- ================= FINISH ================= -->
-
-    <section id="screen-finish" class="screen">
-
-        <header class="topbar">
-
-            <div>VÉRTICE / FINAL</div>
-
-            <div class="live">
-                <span></span>
-                SESSION CLOSED
-            </div>
-
-            <div id="finalRoom">
-                ROOM ------
-            </div>
-
-        </header>
-
-
-        <div class="finish">
-
-            <div>
-
-                <small>RESULTADO</small>
-
-                <h2>
-                    QUEM<br>
-                    FICOU<br>
-                    NO TOPO?
-                </h2>
-
-            </div>
-
-
-            <div>
-
-                <div id="ranking"></div>
-
-                <button
-                    id="newGame"
-                    class="action primary"
-                >
-                    <span>NOVA PARTIDA</span>
-                    <b>↗</b>
-                </button>
-
-            </div>
-
+        <div class="results-head">
+            <span>FIM DA PARTIDA</span>
+            <strong>VÉRTICE</strong>
         </div>
+
+        <div id="podium"></div>
+
+        <div id="ranking"></div>
+
+        <button id="playAgain" class="main-button">
+            NOVA PARTIDA
+            <span>↻</span>
+        </button>
 
     </section>
 
 </main>
 
+<div id="toast" class="toast"></div>
 
-
-<!-- ================= NAME MODAL ================= -->
-
-<div id="nameModal" class="modal hidden">
-
-    <div class="modal-box">
-
-        <small>IDENTIFICAÇÃO</small>
-
-        <h2>
-            COMO VOCÊ<br>
-            VAI APARECER?
-        </h2>
-
-        <input
-            id="nameInput"
-            maxlength="18"
-            placeholder="SEU NOME"
-            autocomplete="off"
-        >
-
-        <button
-            id="confirmName"
-            class="action primary"
-        >
-            <span>CONTINUAR</span>
-            <b>→</b>
-        </button>
-
-        <p id="nameError"></p>
-
-    </div>
-
-</div>
-
-
-
-<div id="toast"></div>
-
-
-<script type="module" src="app.js"></script>
+<script type="module" src="./app.js"></script>
 
 </body>
 </html>
